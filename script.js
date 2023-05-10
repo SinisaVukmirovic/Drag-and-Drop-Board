@@ -15,6 +15,14 @@ droppables.forEach(zone => {
         e.preventDefault();
 
         const bottomTask = insertAboveTask(zone, e.clientY);
+
+        const currentTask = document.querySelector('.is-dragging');
+
+        if (!bottomTask) {
+            zone.appendChild(currentTask);
+        } else {
+            zone.insertBefore(currentTask, bottomTask);
+        }
     });
 });
 
@@ -33,5 +41,8 @@ const insertAboveTask = (zone, mouseY) => {
             closestOffset = offset;
             closestTask = task;
         }
+
     });
+    
+    return closestTask;
 }
